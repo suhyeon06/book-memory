@@ -6,6 +6,7 @@ import Edit from './pages/Edit';
 import MyBook from './pages/MyBook';
 import New from './pages/New';
 import Review from './pages/Review';
+import Button from './components/Button';
 
 function App() {
   return (
