@@ -17,7 +17,7 @@ const MyBook = () => {
     // Filter reviews according to current year
     setData(
       reviews.filter((it) => {
-        return new Date(it.readingDate).getFullYear() === currentYear;
+        return new Date(it.createdAt).getFullYear() === currentYear;
       })
     );
   }, [reviews, currentYear]);

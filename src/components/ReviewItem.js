@@ -28,13 +28,13 @@ const Rate = styled.img`
   transform: translate(-2px, 0);
 `;
 
-const ReadingDate = styled.span`
+const CreatedAt = styled.span`
   font-size: 12px;
   font-weight: 500;
   color: #616161;
 `;
 
-const ReviewItem = ({ id, title, thumbnail, readingDate, rate }) => {
+const ReviewItem = ({ id, title, thumbnail, createdAt, rate }) => {
   const navigate = useNavigate();
   const RateImgSrc = process.env.PUBLIC_URL + `/assets/rate${rate}.png`;
   const moveToReviewPage = () => {
@@ -46,7 +46,7 @@ const ReviewItem = ({ id, title, thumbnail, readingDate, rate }) => {
       <Thumbnail src={thumbnail} />
       <Title>{title}</Title>
       <Rate src={RateImgSrc} />
-      <ReadingDate>{new Date(readingDate).toLocaleDateString()}</ReadingDate>
+      <CreatedAt>{new Date(createdAt).toLocaleDateString()}</CreatedAt>
     </ItemContainer>
   );
 };

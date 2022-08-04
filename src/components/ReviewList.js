@@ -85,10 +85,10 @@ const ReviewList = ({ reviewList }) => {
     const compare = (a, b) => {
       if (sortType === 'newest') {
         // newest
-        return parseInt(b.readingDate) - parseInt(a.readingDate);
+        return parseInt(b.createdAt) - parseInt(a.createdAt);
       } else {
         // oldest
-        return parseInt(a.readingDate) - parseInt(b.readingDate);
+        return parseInt(a.createdAt) - parseInt(b.createdAt);
       }
     };
 

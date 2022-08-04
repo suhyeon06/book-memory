@@ -39,9 +39,11 @@ function App() {
     title,
     author,
     thumbnail,
-    readingDate,
+    readingStartDate,
+    readingFinishDate,
     rate,
-    content
+    content,
+    createdAt
   ) => {
     dispatch({
       type: 'CREATE',
@@ -51,18 +53,34 @@ function App() {
         title,
         author,
         thumbnail,
-        readingDate,
+        readingStartDate,
+        readingFinishDate,
         rate,
         content,
+        createdAt,
       },
     });
     reviewId.current += 1;
   };
 
-  const onEdit = (targetId, readingDate, rate, content) => {
+  const onEdit = (
+    targetId,
+    readingStartDate,
+    readingFinishDate,
+    rate,
+    content,
+    createdAt
+  ) => {
     dispatch({
       type: 'EDIT',
-      data: { id: targetId, readingDate, rate, content },
+      data: {
+        id: targetId,
+        readingStartDate,
+        readingFinishDate,
+        rate,
+        content,
+        createdAt,
+      },
     });
   };
 
