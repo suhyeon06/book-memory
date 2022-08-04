@@ -34,7 +34,15 @@ function App() {
 
   const reviewId = useRef(0);
 
-  const onCreate = (bookId, title, author, readingDate, rate, content) => {
+  const onCreate = (
+    bookId,
+    title,
+    author,
+    thumbnail,
+    readingDate,
+    rate,
+    content
+  ) => {
     dispatch({
       type: 'CREATE',
       data: {
@@ -42,6 +50,7 @@ function App() {
         bookId,
         title,
         author,
+        thumbnail,
         readingDate,
         rate,
         content,
