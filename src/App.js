@@ -29,89 +29,8 @@ const reducer = (state, action) => {
   }
 };
 
-const dummyData = [
-  {
-    id: 1,
-    bookId: 111,
-    title: `Harry's Wedding Harry's Wedding`,
-    author: 'author 1',
-    thumbnail:
-      'http://books.google.com/books/content?id=X73mDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
-    createdAt: 1659312000000,
-    rate: 5,
-    content: 'content 1',
-    readingStartDate: 0,
-    readingFinishDate: 0,
-  },
-  {
-    id: 2,
-    bookId: 222,
-    title: 'title 2',
-    author: 'author 2',
-    thumbnail:
-      'http://books.google.com/books/content?id=X73mDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
-    createdAt: 1659398400000,
-    rate: 3,
-    content: 'content 2',
-    readingStartDate: 0,
-    readingFinishDate: 0,
-  },
-  {
-    id: 3,
-    bookId: 333,
-    title: 'title 3',
-    author: 'author 3',
-    thumbnail:
-      'http://books.google.com/books/content?id=X73mDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
-    createdAt: 1659484800000,
-    rate: 1,
-    content: 'content 3',
-    readingStartDate: 0,
-    readingFinishDate: 0,
-  },
-  {
-    id: 4,
-    bookId: 111,
-    title: 'title 1',
-    author: 'author 1',
-    thumbnail:
-      'http://books.google.com/books/content?id=X73mDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
-    createdAt: 1659312000000,
-    rate: 4,
-    content: 'content 1',
-    readingStartDate: 0,
-    readingFinishDate: 0,
-  },
-  {
-    id: 5,
-    bookId: 222,
-    title: 'title 2',
-    author: 'author 2',
-    thumbnail:
-      'http://books.google.com/books/content?id=X73mDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
-    createdAt: 1659398400000,
-    rate: 5,
-    content: 'content 2',
-    readingStartDate: 0,
-    readingFinishDate: 0,
-  },
-  {
-    id: 6,
-    bookId: 333,
-    title: 'title 3',
-    author: 'author 3',
-    thumbnail:
-      'http://books.google.com/books/content?id=X73mDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
-    createdAt: 1659484800000,
-    rate: 5,
-    content: 'content 3',
-    readingStartDate: 0,
-    readingFinishDate: 0,
-  },
-];
-
 function App() {
-  const [reviews, dispatch] = useReducer(reducer, dummyData);
+  const [reviews, dispatch] = useReducer(reducer, []);
 
   const reviewId = useRef(0);
 
@@ -177,7 +96,8 @@ function App() {
               <Route path="/" element={<MyBook />} />
               <Route path="/review/:id" element={<Review />} />
               <Route path="/edit/:id" element={<Edit />} />
-              <Route path="/new" element={<New />} />
+              <Route path="/new/" element={<New />} />
+              <Route path="/new/:id" element={<New />} />
               <Route path="/new/search" element={<BookSearch />} />
               <Route path="/new/search/details" element={<BookDetails />} />
             </Routes>

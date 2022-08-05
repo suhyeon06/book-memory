@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { useContext, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { HiOutlineChevronLeft } from 'react-icons/hi';
 import { HiOutlineSearch } from 'react-icons/hi';
@@ -147,9 +147,10 @@ const ReviewEditor = () => {
   const readingStartDateRef = useRef();
   const readingFinishDateRef = useRef();
   const contentRef = useRef();
+  const { id } = useParams();
 
   const [isBookSelected, setIsBookSelected] = useState(false);
-  const [bookId, setBookId] = useState();
+  const [bookId, setBookId] = useState(null);
   const [title, setTitle] = useState('Title');
   const [author, setAuthor] = useState('Author');
   const [thumbnail, setThumbnail] = useState();
@@ -159,6 +160,20 @@ const ReviewEditor = () => {
   const [content, setContent] = useState('');
 
   const { onCreate } = useContext(ReviewDispatchContext);
+
+  useEffect(() => {
+    if (id) {
+      fetch(`https://www.googleapis.com/books/v1/volumes/${id}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setTitle(data.volumeInfo.title);
+          setAuthor(data.volumeInfo.authors);
+          setThumbnail(data.volumeInfo.imageLinks.thumbnail);
+        });
+      setIsBookSelected(true);
+      setBookId(id);
+    }
+  }, []);
 
   const moveToSearchPage = () => {
     navigate('/new/search');
@@ -231,7 +246,7 @@ const ReviewEditor = () => {
         leftChild={
           <Button
             onClick={() => {
-              navigate(-1);
+              navigate('/');
             }}
           >
             <HiOutlineChevronLeft />
@@ -245,7 +260,7 @@ const ReviewEditor = () => {
 
       {/* Book Info Section */}
       <BookInfoSection>
-        <Thumbnail src="http://books.google.com/books/content?id=X73mDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api" />
+        <Thumbnail src={thumbnail} />
         <BookInfo>
           <BookTitle>{title}</BookTitle>
           <BookAuthor>{author}</BookAuthor>
