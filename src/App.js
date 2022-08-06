@@ -19,11 +19,11 @@ const reducer = (state, action) => {
       return [action.data, ...state];
     case 'EDIT':
       return state.map(
-        (it) => (it.id === action.data.id ? { ...state, ...action.data } : it)
+        (it) => (it.id === action.data.id ? { ...it, ...action.data } : it)
         // Overwrite readingDate, rate, content on the existing state
       );
     case 'DELETE':
-      return state.filter(it.id !== action.targetId);
+      return state.filter((it) => it.id !== action.targetId);
     default:
       return state;
   }
@@ -67,8 +67,7 @@ function App() {
     readingStartDate,
     readingFinishDate,
     rate,
-    content,
-    createdAt
+    content
   ) => {
     dispatch({
       type: 'EDIT',
@@ -78,7 +77,7 @@ function App() {
         readingFinishDate,
         rate,
         content,
-        createdAt,
+        createdAt: new Date().getTime(),
       },
     });
   };
