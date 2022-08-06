@@ -9,10 +9,27 @@ const BookContainer = styled.div`
   padding-top: 12px;
   padding-bottom: 12px;
 `;
+
 const Thumbnail = styled.img`
   width: 15%;
+  border-radius: 4px;
   margin-right: 16px;
 `;
+
+const NoThumbnail = styled.div`
+  width: 15%;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: #ececec;
+  border-radius: 4px;
+  padding: 4px;
+  margin-right: 16px;
+`;
+
 const BookInfo = styled.div`
   width: 60%;
 `;
@@ -23,6 +40,7 @@ const InfoWrap = styled.div`
 `;
 
 const BookTitle = styled.h4`
+  margin-top: 6px;
   margin-bottom: 6px;
 `;
 
@@ -52,7 +70,13 @@ const Book = ({ id, title, author, thumbnail, publisher, publishedDate }) => {
 
   return (
     <BookContainer>
-      <Thumbnail src={thumbnail}></Thumbnail>
+      {thumbnail === 'no thumbnail' ? (
+        // When book doesn't have thumbnail
+        <NoThumbnail>No Thumbnail Available</NoThumbnail>
+      ) : (
+        // When book has thumbnail
+        <Thumbnail src={thumbnail}></Thumbnail>
+      )}
       <BookInfo>
         <InfoWrap>
           <BookTitle>{title}</BookTitle>

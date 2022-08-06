@@ -34,7 +34,11 @@ const BookSearch = () => {
           id={it.id}
           title={it.volumeInfo.title}
           author={it.volumeInfo.authors}
-          thumbnail={it.volumeInfo.imageLinks.thumbnail}
+          thumbnail={
+            it.volumeInfo.imageLinks
+              ? it.volumeInfo.imageLinks.thumbnail
+              : 'no thumbnail'
+          }
           publisher={it.volumeInfo.publisher}
           publishedDate={it.volumeInfo.publishedDate}
         ></Book>
