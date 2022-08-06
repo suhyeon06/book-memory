@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useContext, useEffect, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { HiOutlineChevronLeft } from 'react-icons/hi';
 import { HiOutlineSearch } from 'react-icons/hi';
@@ -21,7 +21,6 @@ const SearchButton = styled.button`
   border: none;
   border-radius: 4px;
   margin-top: 16px;
-  margin-bottom: 14px;
   cursor: pointer;
 `;
 
@@ -44,11 +43,26 @@ const SectionItemName = styled.div`
 const BookInfoSection = styled(Section)`
   display: flex;
   align-items: center;
+  margin-top: 16px;
 `;
 
 const Thumbnail = styled.img`
   width: 120px;
   border-radius: 4px;
+  margin-right: 12px;
+`;
+
+const NoThumbnail = styled.div`
+  width: 120px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #ececec;
+  border-radius: 4px;
+  padding: 18px;
   margin-right: 12px;
 `;
 
@@ -142,44 +156,44 @@ const rateOptionList = [
   },
 ];
 
-const ReviewEditor = () => {
+const ReviewEditor = ({ isEdit, data }) => {
   const navigate = useNavigate();
   const readingStartDateRef = useRef();
   const readingFinishDateRef = useRef();
   const contentRef = useRef();
-  const { id } = useParams();
 
-  const [isBookSelected, setIsBookSelected] = useState(false);
-  const [bookId, setBookId] = useState(null);
-  const [title, setTitle] = useState('Title');
-  const [author, setAuthor] = useState('Author');
-  const [thumbnail, setThumbnail] = useState();
-  const [readingStartDate, setReadingStartDate] = useState('');
-  const [readingFinishDate, setReadingFinishDate] = useState('');
-  const [rate, setRate] = useState(5);
-  const [content, setContent] = useState('');
+  const [bookId, setBookId] = useState(data.bookId);
+  const [title, setTitle] = useState(data.title);
+  const [author, setAuthor] = useState(data.author);
+  const [thumbnail, setThumbnail] = useState(data.thumbnail);
+  const [readingStartDate, setReadingStartDate] = useState(
+    isEdit ? data.readingStartDate : ''
+  );
+  const [readingFinishDate, setReadingFinishDate] = useState(
+    isEdit ? data.readingFinishDate : ''
+  );
+  const [rate, setRate] = useState(isEdit ? data.rate : 5);
+  const [content, setContent] = useState(isEdit ? data.content : '');
 
-  const { onCreate } = useContext(ReviewDispatchContext);
+  const { onCreate, onEdit, onDelete } = useContext(ReviewDispatchContext);
 
   useEffect(() => {
-    if (id) {
-      fetch(`https://www.googleapis.com/books/v1/volumes/${id}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setTitle(data.volumeInfo.title);
-          setAuthor(data.volumeInfo.authors);
-          setThumbnail(data.volumeInfo.imageLinks.thumbnail);
-        });
-      setIsBookSelected(true);
-      setBookId(id);
-    }
-  }, []);
+    setBookId(data.bookId);
+    setTitle(data.title);
+    setAuthor(data.author);
+    setThumbnail(data.thumbnail);
+  }, [isEdit, data]);
 
   const moveToSearchPage = () => {
     navigate('/new/search');
   };
+
   const moveToMyBookPage = () => {
     navigate('/');
+  };
+
+  const moveToPrevPage = () => {
+    navigate(-1);
   };
 
   const onChange = (e) => {
@@ -203,7 +217,8 @@ const ReviewEditor = () => {
   };
 
   const onSubmit = () => {
-    if (isBookSelected) {
+    // Check if book is selected or not
+    if (bookId) {
       // Check readingStartDate
       if (readingStartDate.length < 1) {
         readingStartDateRef.current.focus();
@@ -222,45 +237,71 @@ const ReviewEditor = () => {
         return;
       }
 
-      onCreate(
-        bookId,
-        title,
-        author,
-        thumbnail,
-        readingStartDate,
-        readingFinishDate,
-        rate,
-        content
-      );
-
-      navigate('/', { replace: true });
+      if (
+        window.confirm(
+          isEdit
+            ? 'Do you want to edit this review?'
+            : 'Do you want to save this review?'
+        )
+      ) {
+        if (isEdit) {
+          onEdit(data.id, readingStartDate, readingFinishDate, rate, content);
+        } else {
+          onCreate(
+            bookId,
+            title,
+            author,
+            thumbnail,
+            readingStartDate,
+            readingFinishDate,
+            rate,
+            content
+          );
+        }
+        navigate('/', { replace: true });
+      }
     } else {
       window.alert('Please select a book.');
+    }
+  };
+
+  const deleteReview = () => {
+    if (window.confirm('Are you sure you want to delete this review?')) {
+      onDelete(data.id);
+      navigate('/', { replace: true });
     }
   };
 
   return (
     <div>
       <Header
-        headerText={'New Review'}
+        headerText={isEdit ? 'Review Edit' : 'New Review'}
         leftChild={
-          <Button
-            onClick={() => {
-              navigate('/');
-            }}
-          >
+          <Button onClick={isEdit ? moveToPrevPage : moveToMyBookPage}>
             <HiOutlineChevronLeft />
           </Button>
         }
-        rightChild={null}
+        rightChild={
+          isEdit ? (
+            <Button type={'negative'} onClick={deleteReview}>
+              Delete
+            </Button>
+          ) : null
+        }
       ></Header>
-      <SearchButton onClick={moveToSearchPage}>
-        <HiOutlineSearch /> Search Book
-      </SearchButton>
+      {!isEdit && (
+        <SearchButton onClick={moveToSearchPage}>
+          <HiOutlineSearch /> Search Book
+        </SearchButton>
+      )}
 
       {/* Book Info Section */}
       <BookInfoSection>
-        <Thumbnail src={thumbnail} />
+        {thumbnail === 'no thumbnail' ? (
+          <NoThumbnail>No Thumbnail Available</NoThumbnail>
+        ) : (
+          <Thumbnail src={thumbnail} />
+        )}
         <BookInfo>
           <BookTitle>{title}</BookTitle>
           <BookAuthor>{author}</BookAuthor>
@@ -319,7 +360,9 @@ const ReviewEditor = () => {
 
       {/* Button Section */}
       <ButtonSection>
-        <Button onClick={moveToMyBookPage}>Cancel</Button>
+        <Button onClick={isEdit ? moveToPrevPage : moveToMyBookPage}>
+          Cancel
+        </Button>
         <Button type={'positive'} onClick={onSubmit}>
           Submit
         </Button>
