@@ -21,7 +21,9 @@ const New = () => {
           setBookData({
             bookId: data.id,
             title: data.volumeInfo.title,
-            author: data.volumeInfo.authors,
+            author: data.volumeInfo.authors
+              ? data.volumeInfo.authors
+              : 'Unknown',
             thumbnail: data.volumeInfo.imageLinks
               ? data.volumeInfo.imageLinks.thumbnail
               : 'no thumbnail',

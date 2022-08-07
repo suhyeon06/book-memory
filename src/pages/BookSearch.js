@@ -33,14 +33,20 @@ const BookSearch = () => {
           key={it.id}
           id={it.id}
           title={it.volumeInfo.title}
-          author={it.volumeInfo.authors}
+          author={it.volumeInfo.authors ? it.volumeInfo.authors : 'Unknown'}
           thumbnail={
             it.volumeInfo.imageLinks
               ? it.volumeInfo.imageLinks.thumbnail
               : 'no thumbnail'
           }
-          publisher={it.volumeInfo.publisher}
-          publishedDate={it.volumeInfo.publishedDate}
+          publisher={
+            it.volumeInfo.publisher ? it.volumeInfo.publisher : 'Unknown'
+          }
+          publishedDate={
+            it.volumeInfo.publishedDate
+              ? it.volumeInfo.publishedDate
+              : 'Unknown'
+          }
         ></Book>
       ))}
     </div>
