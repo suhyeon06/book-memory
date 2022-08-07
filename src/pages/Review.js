@@ -15,6 +15,20 @@ const ReviewContainer = styled.div`
 `;
 const Thumbnail = styled.img`
   width: 150px;
+  height: 195px;
+`;
+
+const NoThumbnail = styled.div`
+  width: 150px;
+  height: 195px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #ececec;
+  border-radius: 4px;
+  padding: 32px;
 `;
 
 const ReviewDetails = styled.div`
@@ -111,7 +125,13 @@ const Review = () => {
         }
       ></Header>
       <ReviewContainer>
-        <Thumbnail src={data.thumbnail} />
+        {data.thumbnail === 'no thumbnail' ? (
+          // When book doesn't have thumbnail
+          <NoThumbnail>No Thumbnail Available</NoThumbnail>
+        ) : (
+          // When book has thumbnail
+          <Thumbnail src={data.thumbnail}></Thumbnail>
+        )}
         <ReviewDetails>
           <BookTitle>{data.title}</BookTitle>
           <AuthorWrap>

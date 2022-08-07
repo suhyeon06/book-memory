@@ -12,7 +12,22 @@ const ItemContainer = styled.div`
 `;
 
 const Thumbnail = styled.img`
+  height: 155px;
   border-radius: 4px;
+  margin-bottom: 4px;
+`;
+
+const NoThumbnail = styled.div`
+  width: 115px;
+  height: 155px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: #ececec;
+  border-radius: 4px;
+  padding: 20px;
   margin-bottom: 4px;
 `;
 
@@ -43,7 +58,13 @@ const ReviewItem = ({ id, title, thumbnail, createdAt, rate }) => {
 
   return (
     <ItemContainer onClick={moveToReviewPage}>
-      <Thumbnail src={thumbnail} />
+      {thumbnail === 'no thumbnail' ? (
+        // When book doesn't have thumbnail
+        <NoThumbnail>No Thumbnail Available</NoThumbnail>
+      ) : (
+        // When book has thumbnail
+        <Thumbnail src={thumbnail}></Thumbnail>
+      )}
       <Title>{title}</Title>
       <Rate src={RateImgSrc} />
       <CreatedAt>{new Date(createdAt).toLocaleDateString()}</CreatedAt>
