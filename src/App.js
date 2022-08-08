@@ -47,8 +47,10 @@ function App() {
       const reviewList = JSON.parse(localData).sort(
         (a, b) => parseInt(b.id) - parseInt(a.id)
       );
-      reviewId.current = parseInt(reviewList[0].id) + 1;
-      dispatch({ type: 'INIT', data: reviewList });
+      if (reviewId.length >= 1) {
+        reviewId.current = parseInt(reviewList[0].id) + 1;
+        dispatch({ type: 'INIT', data: reviewList });
+      }
     }
   }, []);
 
