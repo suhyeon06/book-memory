@@ -4,7 +4,6 @@ import { useEffect, useReducer, useRef } from 'react';
 import { ReviewStateContext } from './context/ReviewStateContext';
 import { ReviewDispatchContext } from './context/ReviewDispatchContext';
 
-import BookDetails from './pages/BookDetails';
 import BookSearch from './pages/BookSearch';
 import Edit from './pages/Edit';
 import MyBook from './pages/MyBook';
