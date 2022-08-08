@@ -98,7 +98,7 @@ const ReviewList = ({ reviewList }) => {
     const filteredList =
       filterType === 'all'
         ? copyList
-        : copyList.filter((it) => it.rate === parseInt(filterType));
+        : copyList.filter((it) => parseInt(it.rate) === parseInt(filterType));
 
     // Sort list by time
     const sortedList = filteredList.sort(compare);
