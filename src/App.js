@@ -117,7 +117,6 @@ function App() {
               <Route path="/new/" element={<New />} />
               <Route path="/new/:id" element={<New />} />
               <Route path="/new/search" element={<BookSearch />} />
-              <Route path="/new/search/details" element={<BookDetails />} />
             </Routes>
           </div>
         </BrowserRouter>
