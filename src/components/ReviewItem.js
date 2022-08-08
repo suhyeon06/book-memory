@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const ItemContainer = styled.div`
@@ -72,4 +73,4 @@ const ReviewItem = ({ id, title, thumbnail, createdAt, rate }) => {
   );
 };
 
-export default ReviewItem;
+export default React.memo(ReviewItem);

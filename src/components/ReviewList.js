@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import ReviewItem from './ReviewItem';
 
@@ -65,7 +65,7 @@ const Menu = styled.select`
   cursor: pointer;
 `;
 
-const MenuController = ({ type, onChange, options }) => {
+const MenuController = React.memo(({ type, onChange, options }) => {
   return (
     <Menu value={type} onChange={(e) => onChange(e.target.value)}>
       {options.map((it) => (
@@ -75,7 +75,7 @@ const MenuController = ({ type, onChange, options }) => {
       ))}
     </Menu>
   );
-};
+});
 
 const ReviewList = ({ reviewList }) => {
   const [sortType, setSortType] = useState('newest');
@@ -119,7 +119,14 @@ const ReviewList = ({ reviewList }) => {
       ></MenuController>
       <ReviewListContainer>
         {getProcessedReviewList().map((it) => (
-          <ReviewItem key={it.id} {...it}></ReviewItem>
+          <ReviewItem
+            key={it.id}
+            id={it.id}
+            title={it.title}
+            thumbnail={it.thumbnail}
+            createdAt={it.createdAt}
+            rate={it.rate}
+          ></ReviewItem>
         ))}
       </ReviewListContainer>
     </div>

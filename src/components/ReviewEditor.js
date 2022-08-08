@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { HiOutlineChevronLeft } from 'react-icons/hi';
@@ -66,7 +66,7 @@ const NoThumbnail = styled.div`
   margin-right: 12px;
 `;
 
-const BookInfo = styled.div`
+const BookInfoWrap = styled.div`
   display: flex;
   flex-direction: column;
 `;
@@ -155,6 +155,22 @@ const rateOptionList = [
     name: '⭐',
   },
 ];
+
+const BookInfo = React.memo(({ thumbnail, title, author }) => {
+  return (
+    <BookInfoSection>
+      {thumbnail === 'no thumbnail' ? (
+        <NoThumbnail>No Thumbnail Available</NoThumbnail>
+      ) : (
+        <Thumbnail src={thumbnail} />
+      )}
+      <BookInfoWrap>
+        <BookTitle>{title}</BookTitle>
+        <BookAuthor>{author}</BookAuthor>
+      </BookInfoWrap>
+    </BookInfoSection>
+  );
+});
 
 const ReviewEditor = ({ isEdit, data }) => {
   const navigate = useNavigate();
@@ -296,17 +312,7 @@ const ReviewEditor = ({ isEdit, data }) => {
       )}
 
       {/* Book Info Section */}
-      <BookInfoSection>
-        {thumbnail === 'no thumbnail' ? (
-          <NoThumbnail>No Thumbnail Available</NoThumbnail>
-        ) : (
-          <Thumbnail src={thumbnail} />
-        )}
-        <BookInfo>
-          <BookTitle>{title}</BookTitle>
-          <BookAuthor>{author}</BookAuthor>
-        </BookInfo>
-      </BookInfoSection>
+      <BookInfo thumbnail={thumbnail} title={title} author={author}></BookInfo>
 
       {/* Reading Date Section */}
       <Section>
