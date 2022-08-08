@@ -229,6 +229,7 @@ const ReviewEditor = ({ isEdit, data }) => {
       case 'content':
         setContent(value);
         break;
+      default:
     }
   };
 
