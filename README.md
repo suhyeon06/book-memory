@@ -1,70 +1,89 @@
-# Getting Started with Create React App
+# Book Memory
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A personal archive for recording book reviews
 
-## Available Scripts
+<img width="40%" src="https://user-images.githubusercontent.com/93829156/188270525-db234e34-d617-49a2-9d6a-2d54b0b06b21.png">
 
-In the project directory, you can run:
+- This is a project to learn and practice `React Hooks`
 
-### `npm start`
+<br>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# 🔗 Link
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- [https://book-memory.netlify.app/](https://book-memory.netlify.app/)
 
-### `npm test`
+<br>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# 🔧 Skills
 
-### `npm run build`
+- React
+- Styled components
+- LocalStorage
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# 🚀 Deployment
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Netlify
 
-### `npm run eject`
+<br>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# 🛠️ Features
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## My Book
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<img width="40%" src="https://user-images.githubusercontent.com/93829156/188261869-062554e0-a310-45f2-8ea0-eb0e7f4d0a10.gif">
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Sort reviews by date written (newest, oldest)
+- Filter reviews by year and star rating
 
-## Learn More
+<br>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## New Review
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<img width="40%" src="https://user-images.githubusercontent.com/93829156/188262120-f5dfa885-2f37-4029-9c52-29d785f4acdc.gif">
 
-### Code Splitting
+- Choose a book to review
+- When searching for a book, the search results according to the search term (book title) are retrieved from Google Books APIs and displayed.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<br>
 
-### Analyzing the Bundle Size
+## Review
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<img width="40%" src="https://user-images.githubusercontent.com/93829156/188262122-14096068-0748-4ecf-b0b9-3a8dd60f2e5c.gif">
 
-### Making a Progressive Web App
+- Display written review
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<br>
 
-### Advanced Configuration
+## Review Edit
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+<img width="40%" src="https://user-images.githubusercontent.com/93829156/188262123-fd5450e5-80dc-45c7-bfcb-dcac6c28a0e1.gif">
 
-### Deployment
+- Edit or delete a written review
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+<br>
 
-### `npm run build` fails to minify
+# What I learned
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Understood how React hooks work and applied them in this project.
+- Optimized performance by preventing unnecessary re-rendering of components.
+- Experienced in Styled components.
+
+  <br>
+
+# How I used React hooks
+
+- React memo
+  - In order to prevent unnecessary re-rendering of controllers and review items, the components are memoized using React memo and the memoized results are reused.
+- useParams
+  - Access the URL parameter of the review page and edit page to get the review id and display the review content.
+  - Access the URL parameter of the new review page to get the book id and display the book information.
+- useRef
+  - Give focus to unfilled elements when writing a new review or editing an existing review.
+- useReducer
+  - At first, the onCreate, onEdit, and onDelete functions to change the review list were declared separately, and each function was reused using useCallback to prevent unnecessary re-rendering of child components that receive these functions.
+  - To facilitate state management, the state update logic is separated from the component using useReducer.
+- useContext
+  - Create a ReviewStateContext to make the review list available to child components without having to pass props down manually.
+  - Create a ReviewDispatchContext to make the onCreate, onEdit, onDelete functions in the reducer available to child components without having to pass props down manually.
