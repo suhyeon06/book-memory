@@ -2,7 +2,7 @@
 
 A personal archive for recording book reviews
 
-<img width="40%" src="https://user-images.githubusercontent.com/93829156/188270525-db234e34-d617-49a2-9d6a-2d54b0b06b21.png">
+<img width="60%" src="https://user-images.githubusercontent.com/93829156/188270525-db234e34-d617-49a2-9d6a-2d54b0b06b21.png">
 
 - This is a project to learn and practice `React Hooks`
 
@@ -32,7 +32,7 @@ A personal archive for recording book reviews
 
 ## My Book
 
-<img width="40%" src="https://user-images.githubusercontent.com/93829156/188261869-062554e0-a310-45f2-8ea0-eb0e7f4d0a10.gif">
+<img width="60%" src="https://user-images.githubusercontent.com/93829156/188261869-062554e0-a310-45f2-8ea0-eb0e7f4d0a10.gif">
 
 - Sort reviews by date written (newest, oldest)
 - Filter reviews by year and star rating
@@ -41,7 +41,7 @@ A personal archive for recording book reviews
 
 ## New Review
 
-<img width="40%" src="https://user-images.githubusercontent.com/93829156/188262120-f5dfa885-2f37-4029-9c52-29d785f4acdc.gif">
+<img width="60%" src="https://user-images.githubusercontent.com/93829156/188262120-f5dfa885-2f37-4029-9c52-29d785f4acdc.gif">
 
 - Choose a book to review
 - When searching for a book, the search results according to the search term (book title) are retrieved from Google Books APIs and displayed.
@@ -50,7 +50,7 @@ A personal archive for recording book reviews
 
 ## Review
 
-<img width="40%" src="https://user-images.githubusercontent.com/93829156/188262122-14096068-0748-4ecf-b0b9-3a8dd60f2e5c.gif">
+<img width="60%" src="https://user-images.githubusercontent.com/93829156/188262122-14096068-0748-4ecf-b0b9-3a8dd60f2e5c.gif">
 
 - Display written review
 
@@ -58,7 +58,7 @@ A personal archive for recording book reviews
 
 ## Review Edit
 
-<img width="40%" src="https://user-images.githubusercontent.com/93829156/188262123-fd5450e5-80dc-45c7-bfcb-dcac6c28a0e1.gif">
+<img width="60%" src="https://user-images.githubusercontent.com/93829156/188262123-fd5450e5-80dc-45c7-bfcb-dcac6c28a0e1.gif">
 
 - Edit or delete a written review
 
