@@ -64,7 +64,7 @@ A personal archive for recording book reviews
 
 <br>
 
-# What I learned
+# 💡 What I learned
 
 - Understood how React hooks work and applied them in this project.
 - Optimized performance by preventing unnecessary re-rendering of components.
@@ -72,7 +72,7 @@ A personal archive for recording book reviews
 
   <br>
 
-# How I used React hooks
+# 👩‍💻 How I used React hooks
 
 - React memo
   - In order to prevent unnecessary re-rendering of controllers and review items, the components are memoized using React memo and the memoized results are reused.
